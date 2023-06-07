@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Categories {
+@NoArgsConstructor
+public class Author {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
 }

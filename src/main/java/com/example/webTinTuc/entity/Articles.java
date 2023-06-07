@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Entity
 @Table
 @Data
@@ -17,6 +19,9 @@ public class Articles {
     private Integer id;
     private  String tile;
     private String content;
-    private String url;
-    private String creat_at;
+//    private String url;
+    private String author_id;
+    private Integer category_id;
+    private Date creat_at;
+
 }
