@@ -1,47 +1,52 @@
 package com.example.webTinTuc.service.impl;
 
-import com.example.webTinTuc.entity.Author;
+import com.example.webTinTuc.model.Author;
+import com.example.webTinTuc.repository.AuthorRepository;
 import com.example.webTinTuc.service.AuthorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorImp implements AuthorService {
-    private List<Author> authors = new ArrayList<>();
+    @Autowired
+    private AuthorRepository authorRepository;
     @Override
     public List<Author> getAllAuthor() {
-        return authors;
+        return authorRepository.findAll();
     }
 
     @Override
-    public Author getAuthorById(int id) {
-        for (Author author : authors){
-            if(author.getId() == id){
-                return  author;
-            }
+    public Author getAuthorById(long id) {
+        Optional<Author> author = authorRepository.findById(id);
+        return author.get();
+    }
+
+    @Override
+    public Author addAuthor(Author name) {
+        Author author = new Author();
+        author.setName(name.getName());
+        return authorRepository.save(author);
+    }
+
+    @Override
+    public Author updateAuthor(long id, Author author) {
+        Optional<Author> author1 = authorRepository.findById(id);
+        if(author1.isPresent())
+        {
+            Author restart = author1.get();
+            restart.setName(author.getName());
+            authorRepository.save(restart);
         }
-        return null;
+        return author;
     }
 
     @Override
-    public void addAuthor(Author author) {
-        authors.add(author);
-
-    }
-
-    @Override
-    public void updateAuthor(int id, Author author) {
-        for (Author a : authors) {
-            if (a.getId() ==id){
-                a.setName(author.getName());
-            }
-        }
-    }
-
-    @Override
-    public void deleteAuthor(int id) {
-        authors.removeIf(a -> a.getId() ==id);
+    public void deleteAuthor(long id) {
+        Optional<Author> author = authorRepository.findById(id);
+        Author rs = author.get();
+        authorRepository.delete(rs);
     }
 }

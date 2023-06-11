@@ -1,42 +1,52 @@
 package com.example.webTinTuc.controller;
 
-import com.example.webTinTuc.entity.Articles;
-import com.example.webTinTuc.entity.Author;
-import com.example.webTinTuc.service.ArticlesService;
+import com.example.webTinTuc.model.Article;
+import com.example.webTinTuc.model.Author;
+import com.example.webTinTuc.model.Category;
+import com.example.webTinTuc.repository.AuthorRepository;
 import com.example.webTinTuc.service.AuthorService;
+import com.example.webTinTuc.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/author")
+@RequestMapping("/api/authors")
 public class AuthorController {
-
     @Autowired
     private AuthorService authorService;
-    @GetMapping
+
+    @GetMapping("/")
     public List<Author> getAllAuthor(){
+
         return authorService.getAllAuthor();
     }
-
     @GetMapping("/{id}")
-    public Author getAllAuthor(@PathVariable int id){
-        return authorService.getAuthorById(id);
+    public ResponseEntity<Author> getCategoryById(@PathVariable long id){
+        Author author =authorService.getAuthorById(id);
+        return ResponseEntity.ok(author);
     }
 
-    @PostMapping
-    public void addAuthor(@RequestBody Author author){
-        authorService.addAuthor(author);
+
+
+    @PostMapping("/create")
+    public ResponseEntity<Author> createAuthor(@RequestBody Author author ){
+        Author author1 = authorService.addAuthor(author);
+        return ResponseEntity.ok(author1);
     }
 
-    @PutMapping("/{id}")
-    public  void updateAuthor(@PathVariable int id, @RequestBody Author author){
-        authorService.updateAuthor(id,author);
+    @PutMapping("/update/{id}")
+    public Author updateAuthor(@RequestBody Author author, @PathVariable long id ){
+        Author author1 = authorService.updateAuthor(id,author);
+        return author1;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAuthor(@PathVariable int id){
+    public String deleteAuthor(@PathVariable long id) {
         authorService.deleteAuthor(id);
+        return "Xóa thành công";
     }
 }

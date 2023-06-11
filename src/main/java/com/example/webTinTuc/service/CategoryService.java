@@ -1,14 +1,14 @@
 package com.example.webTinTuc.service;
 
-import com.example.webTinTuc.entity.Category;
+import com.example.webTinTuc.model.Category;
 
 import java.util.List;
 
 public interface CategoryService {
     List<Category> getAllCategories();
-    Category getCategoryById(int id);
-    void addCategory(Category name);
-    void uppdateCategory(int id, Category category);
-    void deleteCategory(int id);
+    Category getCategoryById(long id);
+    Category CreateCategory(Category name);
+    Category updateCategory(long id, Category category);
+    void deleteCategory(long id);
 
 }

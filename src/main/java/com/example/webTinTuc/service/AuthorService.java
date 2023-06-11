@@ -1,13 +1,14 @@
 package com.example.webTinTuc.service;
 
-import com.example.webTinTuc.entity.Author;
+import com.example.webTinTuc.model.Author;
 
 import java.util.List;
 
 public interface AuthorService {
     List<Author> getAllAuthor();
-    Author getAuthorById(int id);
-    void addAuthor(Author author);
-    void updateAuthor(int id, Author author);
-    void deleteAuthor(int id);
+    Author getAuthorById(long id);
+    Author addAuthor(Author name);
+    Author updateAuthor(long id, Author author);
+    void deleteAuthor(long id);
+
 }

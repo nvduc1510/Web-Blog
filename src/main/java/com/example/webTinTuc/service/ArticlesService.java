@@ -1,15 +1,17 @@
 package com.example.webTinTuc.service;
 
-import com.example.webTinTuc.entity.Articles;
+import com.example.webTinTuc.model.Article;
 
 
 import java.util.List;
 
 
 public interface ArticlesService {
-    List<Articles> getAllArticles();
-    Articles getArticleById(int id);
-    void addArticle(Articles article);
-    void updateArticle(int id, Articles article);
-    void deleteArticle(int id);
+    List<Article> getAllArticles();
+    Article getArticleById(long id);
+    Article addArticle(Article article, long category_id, long author_id);
+    Article updateArticle(long id, Article article);
+    void deleteArticle(long id);
+
+
 }
